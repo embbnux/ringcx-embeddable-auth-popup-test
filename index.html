@@ -24,7 +24,7 @@
       }
     }
     if (data.callbackUri) {
-        document.querySelector("#rc-widget-adapter-frame").contentWindow.postMessage({
+        document.querySelector("#engage-voice-embeddable-adapter-frame").contentWindow.postMessage({
             type: 'rc-ev-authorization-code',
             callbackUri: data.callbackUri,
         }, '*');
