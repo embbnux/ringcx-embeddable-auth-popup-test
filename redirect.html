@@ -1,0 +1,16 @@
+<html>
+    <body>
+        Loading
+    </body>
+    <script>
+        // the origin is used for postMessage
+        var origin = 'https://embbnux.github.io'; // origin where the widget is deployed.
+        if (window.opener) {
+          // pass callbackUri to widget
+          window.opener.postMessage({
+            callbackUri: window.location.href,
+          }, origin);
+          window.close();
+        }
+      </script>
+</html>

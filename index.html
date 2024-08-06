@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+   var redirectUri = encodeURIComponent('https://embbnux.github.io/ringcx-embeddable-auth-popup-test/redirect.html');
+   var clientId = '4qOTsIZz5qqbmVCrWZQ8lt';
+  // Add widget
+  (function() {
+    var rcs = document.createElement("script");
+    rcs.src = "https://ringcentral.github.io/engage-voice-embeddable/adapter.js?disableLoginPopup=1&redirectUri=" + redirectUri + '&clientId=' + clientId;
+    var rcs0 = document.getElementsByTagName("script")[0];
+    rcs0.parentNode.insertBefore(rcs, rcs0);
+  })();
+  window.addEventListener('message', (e) => {
+    const data = e.data;
+    if (data) {
+      switch (data.type) {
+        case 'rc-ev-loginPopup':
+          // get login oAuthUri from widget
+          console.log('rc-ev-loginPopup:', data.oAuthUri);
+          window.open(data.oAuthUri); // open oauth uri to login
+        default:
+          break;
+      }
+    }
+    if (data.callbackUri) {
+        document.querySelector("#rc-widget-adapter-frame").contentWindow.postMessage({
+            type: 'rc-ev-authorization-code',
+            callbackUri: data.callbackUri,
+        }, '*');
+    }
+  });
+</script>
+</body>
+</html>
