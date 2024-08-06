@@ -1,0 +1,1 @@
+# ringcx-embeddable-auth-popup-test
